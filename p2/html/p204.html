@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>p204 API documentation</title>
+<meta name="description" content="Implementación de las funciones pedidadas para la solución de la práctica 2 de la asignatura de
+Practicas de Algoritmos y Estructuras de Datos …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>p204</code></h1>
+</header>
+<section id="section-intro">
+<p>Implementación de las funciones pedidadas para la solución de la práctica 2 de la asignatura de
+Practicas de Algoritmos y Estructuras de Datos Avanzadas.</p>
+<p>Autor: Alejandro Raúl Hurtado <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#108;&#101;&#106;&#97;&#110;&#100;&#114;&#111;&#114;&#46;&#104;&#117;&#114;&#116;&#97;&#100;&#111;&#64;&#101;&#115;&#116;&#117;&#100;&#105;&#97;&#110;&#116;&#101;&#46;&#117;&#97;&#109;&#46;&#101;&#115;">&#97;&#108;&#101;&#106;&#97;&#110;&#100;&#114;&#111;&#114;&#46;&#104;&#117;&#114;&#116;&#97;&#100;&#111;&#64;&#101;&#115;&#116;&#117;&#100;&#105;&#97;&#110;&#116;&#101;&#46;&#117;&#97;&#109;&#46;&#101;&#115;</a></p>
+<p>Autor: Camilo Jené Conde <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#97;&#109;&#105;&#108;&#111;&#46;&#106;&#101;&#110;&#101;&#99;&#64;&#101;&#115;&#116;&#117;&#100;&#105;&#97;&#110;&#116;&#101;&#46;&#117;&#97;&#109;&#46;&#101;&#115;">&#99;&#97;&#109;&#105;&#108;&#111;&#46;&#106;&#101;&#110;&#101;&#99;&#64;&#101;&#115;&#116;&#117;&#100;&#105;&#97;&#110;&#116;&#101;&#46;&#117;&#97;&#109;&#46;&#101;&#115;</a></p>
+<p>2022 EPS-UAM</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+    Implementación de las funciones pedidadas para la solución de la práctica 2 de la asignatura de
+    Practicas de Algoritmos y Estructuras de Datos Avanzadas.
+
+    Autor: Alejandro Raúl Hurtado &lt;alejandror.hurtado@estudiante.uam.es&gt;
+
+    Autor: Camilo Jené Conde &lt;camilo.jenec@estudiante.uam.es&gt;
+
+    2022 EPS-UAM 
+&#34;&#34;&#34;
+import numpy as np
+import itertools
+
+from typing import Dict, List
+
+def init_cd(n: int)-&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Nombre:
+        init_cd
+    
+    Descripción:
+        Inicializador de un array. Creamos un array de n elementos iniciados a -1.
+    
+    Argumentos:
+        - n: tamaño del array.
+
+    Retorno:
+        - Array inicializado a -1.
+    &#34;&#34;&#34;
+    return np.array([-1]*n)
+
+def union(rep_1: int, rep_2: int, p_cd: np.ndarray)-&gt; int:
+    &#34;&#34;&#34;
+    Nombre:
+        union
+    
+    Descripción:
+        Función que une dos árboles. Debemos comprobar cuál es más profundo para intentar
+        no aumentar la profundidad del árbol si no es necesario.
+    
+    Argumentos:
+        - rep_1: índice de la raíz del primer árbol.
+        - rep_2: índice de la raíz del segundo árbol.
+        - p_cd: array con los árboles.
+
+    Retorno:
+        - La raíz de ambos árboles unidos.
+    &#34;&#34;&#34;
+    if p_cd[rep_1] &lt; p_cd[rep_2]:
+        p_cd[rep_2] = rep_1
+        return rep_1
+    elif p_cd[rep_1] &gt; p_cd[rep_2]:
+        p_cd[rep_1] = rep_2
+        return rep_2
+    else:
+        p_cd[rep_1] -= 1
+        p_cd[rep_2] = rep_1
+        return rep_1
+
+def find(ind: int, p_cd: np.ndarray)-&gt; int:
+    &#34;&#34;&#34;
+    Nombre:
+        find
+
+    Descripción:
+        Función encargada de encontrar la raíz del índice pasado por parámetro. Se
+        pide la compresión de caminos para que el rendimiento al buscar otro elemento
+        sea mayor.
+
+    Argumentos:
+        - ind: índice del nodo con el que vamos a trabajar.
+        - p_cd: array con los árboles.
+    
+    Retorno:
+        - Índice de la raíz del árbol perteneciente al nodo.
+    &#34;&#34;&#34;
+    aux = []
+    while p_cd[ind] &gt;= 0:
+        &#34;&#34;&#34;
+        Algoritmo de búsqueda hacía arriba.
+
+        Guardamos en un array los nodos visitados para más tarde comprimir el camino.
+        &#34;&#34;&#34;
+        aux.append(ind) # Guardamos el índice del nodo visitado.
+        ind = p_cd[ind]
+
+    for x in range(len(aux)):
+        &#34;&#34;&#34;
+        Compresión de caminos. Situamos como padre de los nodos visitados a la 
+        raíz obtenida.
+        &#34;&#34;&#34;
+        p_cd[aux[x]] = ind
+
+    return ind
+
+def cd_2_dict(p_cd: np.ndarray)-&gt; Dict:
+    &#34;&#34;&#34;
+    Nombre:
+        cd_2_dict
+    
+    Descripción:
+        Función encargada de devolver un diccionaro compuesto por:
+            (clave = raíz del árbol: valor = árbol)
+    
+    Argumentos:
+        - p_cd: array con los árboles.
+    
+    Retorno:
+        - Diccionario con los datos de los hijos de cada raíz.
+    &#34;&#34;&#34;
+    dict = {}
+    for x in range(len(p_cd)):
+        if p_cd[x] &lt; 0:
+            if x not in dict:
+                dict[x] = [x]
+        else:
+            if find(x, p_cd) in dict:
+                dict[find(x, p_cd)] += [x]
+            else:
+                dict[find(x, p_cd)] = [find(x, p_cd)]
+                dict[find(x, p_cd)] += [x]
+    
+    return dict
+
+def ccs(n: int, l: List)-&gt; Dict:
+    &#34;&#34;&#34;
+    Nombre:
+        css
+
+    Descripción:
+        Función creada para trabajar con componentes conexas.
+        Sobre la lista, crearemos un diccionario con la siguiente estructura:
+
+            - clave: el padre.
+            - valor: la conexión.
+            - {valor1: (valor1, valor2)}
+
+    Argumentos:
+        - n: el número de nodos que hay.
+        - l: la lista con las conexiones.
+    Retorno:
+        - Diccionario con las componentes conexas.
+    &#34;&#34;&#34;
+    d = {}
+    list_aux = init_cd(n)
+
+    for k, v in l:
+        rK = find(k, list_aux)
+        rV = find(v, list_aux)
+
+        if rK != rV:
+            if k in d:
+                d[k] += [(k, v)]
+            elif v in d:
+                d[v] += [(k, v)]
+            else:
+                d[k] = [(k, v)]
+
+            list_aux[v] = k
+
+    return d
+
+def dist_matrix(n_nodes: int, w_max=10)-&gt; np.ndarray:
+    &#34;&#34;&#34;
+        Nombre:
+            dist_matrix
+
+        Descripción:
+            Función que genera una matriz cuadrada de distancias.
+
+        Argumentos:
+            - n_nodes: numero de nodos de la matriz.
+            - w_max: valor máximo de cada nodo.
+        Retorno:
+            - Matriz de distancias.
+    &#34;&#34;&#34;
+
+    #generamos la matriz aleatoria
+    M = np.random.randint(1, w_max, size=(n_nodes, n_nodes))
+    #hacemos que la matriz sea simetria respecto a la diagonal
+    for i in range(n_nodes):
+        for j in range(n_nodes):
+            M[j][i] = M[i][j]
+
+    #hacemos que la diagonal sea 0
+    np.fill_diagonal(M,0)
+
+    return M
+
+def greedy_tsp(dist_m: np.ndarray, node_ini=0)-&gt; List:
+    &#34;&#34;&#34;
+        Nombre:
+            greedy_tsp
+        
+        Descripción:
+            Función que buscará el circuito en la matriz, partiendo desde el nodo 
+            inicial siguiendo las distancias más cortas.
+
+        Argumentos:
+            - dist_m: matriz de distancias.
+            - node_ini: nodo en el que empieza el circuito.
+
+        Retorno:
+            - La lista correspondiente al circuito.
+    &#34;&#34;&#34;
+    num_nodes = dist_m.shape[0]
+
+    lista = [node_ini]
+
+    while len(lista) &lt; num_nodes:
+        current_node = lista[-1]
+
+        not_used_nodes = list(np.argsort(dist_m[current_node]))
+
+        for i in not_used_nodes:
+            if i not in lista:
+                lista.append(i)
+                break
+
+    return lista + [node_ini]
+
+def len_circuit(circuit: List, dist_m: np.ndarray) -&gt; int:
+    &#34;&#34;&#34;
+        Nombre:
+            len_circuit
+        
+        Descripción:
+            Función que calculará la longitud total del circuito.
+
+        Argumentos:
+            - circuit: circuito.
+            - dist_m: matriz de distancias.
+
+        Retorno:
+            - Longitud total.
+    &#34;&#34;&#34;
+    pos_ini = circuit[0]
+    suma = 0
+
+    for i in circuit:
+        if i == pos_ini:
+            pass
+        else:
+            pos_next = i
+            suma += dist_m[pos_ini][pos_next]
+            pos_ini = pos_next       
+
+    return suma
+
+def repeated_greedy_tsp(dist_m: np.ndarray) -&gt; List:
+    &#34;&#34;&#34;
+        Nombre:
+            repeated_greedy_tsp
+
+        Descripción:
+            Función que devolverá el circuito más corto. Es decir, tras buscar
+            la distancia de todas las opciones, devolverá el que tenga el circuito
+            con menor distancia recorrida.
+
+        Argumentos:
+            - dist_m: matriz de distancias.
+
+        Retorno:
+            - Circuito más corto.
+    &#34;&#34;&#34;
+    tam = dist_m.shape[0]
+    lista_aux = []
+
+    for i in range(tam):
+        lista_aux.append(len_circuit(greedy_tsp(dist_m, i), dist_m))
+
+    indiceMin = np.argmin(lista_aux)
+            
+    return greedy_tsp(dist_m, indiceMin)
+
+def exhaustive_tsp(dist_m: np.ndarray) -&gt; List:
+    &#34;&#34;&#34;
+        Nombre:
+            exhaustive_tsp
+        
+        Descripción:
+            Utilizando la librería de itertools, comprobaremos todas las permutaciones posibles y veremos
+            cuál tiene la menor longitud de camino.
+
+        Argumentos:
+            - dist_m: matriz de distancias.
+
+        Retorno:
+            - List: array del circuito con menor longitud.
+    &#34;&#34;&#34;
+    tam = dist_m.shape[0]
+    lista_aux = []
+    tam_aux = None
+
+    # itertools.permutations devuelve TODAS las iteraciones posibles entre lo pasado por parámetro, en este caso un array de índices.
+    for i in itertools.permutations(range(tam)):
+        aux2 = np.append(i, i[0])
+
+        tam2 = len_circuit(aux2, dist_m)
+
+        if tam_aux == None or tam_aux &gt; tam2:
+            tam_aux = tam2
+            lista_aux = aux2
+    
+    return lista_aux
+
+if __name__ == &#34;__main__&#34;:
+    arb = [1, -2, 1, -5, 3, 4, 5, 6]
+    print(find(0, arb))
+    print(find(7, arb))
+    print(f&#34;El diccionario de los subconjuntos es: {cd_2_dict(arb)}&#34;)
+
+    union(4, 6, arb)
+    print(f&#34;El padre de todos es: {find(0, arb)}&#34;)
+    print(find(7, arb))
+
+    l = [(0, 1), (0, 3), (1, 2), (1, 4), (3, 4), (4, 5), (4, 6), (5, 6)]
+
+    print(f&#34;El diccionario creado es: {ccs(7, l)}&#34;)
+
+    print(&#34;------------------------------------&#34;)
+    M = dist_matrix(6)
+    for i in range(len(M)):
+        print(M[i])
+
+    L = greedy_tsp(M)
+    print(L)
+    print(len_circuit(L, M))
+    print(repeated_greedy_tsp(M))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="p204.ccs"><code class="name flex">
+<span>def <span class="ident">ccs</span></span>(<span>n: int, l: List) ‑> Dict</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>css</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función creada para trabajar con componentes conexas.
+Sobre la lista, crearemos un diccionario con la siguiente estructura:</p>
+<pre><code>- clave: el padre.
+- valor: la conexión.
+- {valor1: (valor1, valor2)}
+</code></pre>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>n: el número de nodos que hay.</li>
+<li>l: la lista con las conexiones.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Diccionario con las componentes conexas.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ccs(n: int, l: List)-&gt; Dict:
+    &#34;&#34;&#34;
+    Nombre:
+        css
+
+    Descripción:
+        Función creada para trabajar con componentes conexas.
+        Sobre la lista, crearemos un diccionario con la siguiente estructura:
+
+            - clave: el padre.
+            - valor: la conexión.
+            - {valor1: (valor1, valor2)}
+
+    Argumentos:
+        - n: el número de nodos que hay.
+        - l: la lista con las conexiones.
+    Retorno:
+        - Diccionario con las componentes conexas.
+    &#34;&#34;&#34;
+    d = {}
+    list_aux = init_cd(n)
+
+    for k, v in l:
+        rK = find(k, list_aux)
+        rV = find(v, list_aux)
+
+        if rK != rV:
+            if k in d:
+                d[k] += [(k, v)]
+            elif v in d:
+                d[v] += [(k, v)]
+            else:
+                d[k] = [(k, v)]
+
+            list_aux[v] = k
+
+    return d</code></pre>
+</details>
+</dd>
+<dt id="p204.cd_2_dict"><code class="name flex">
+<span>def <span class="ident">cd_2_dict</span></span>(<span>p_cd: numpy.ndarray) ‑> Dict</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>cd_2_dict</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función encargada de devolver un diccionaro compuesto por:
+(clave = raíz del árbol: valor = árbol)</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>p_cd: array con los árboles.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Diccionario con los datos de los hijos de cada raíz.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cd_2_dict(p_cd: np.ndarray)-&gt; Dict:
+    &#34;&#34;&#34;
+    Nombre:
+        cd_2_dict
+    
+    Descripción:
+        Función encargada de devolver un diccionaro compuesto por:
+            (clave = raíz del árbol: valor = árbol)
+    
+    Argumentos:
+        - p_cd: array con los árboles.
+    
+    Retorno:
+        - Diccionario con los datos de los hijos de cada raíz.
+    &#34;&#34;&#34;
+    dict = {}
+    for x in range(len(p_cd)):
+        if p_cd[x] &lt; 0:
+            if x not in dict:
+                dict[x] = [x]
+        else:
+            if find(x, p_cd) in dict:
+                dict[find(x, p_cd)] += [x]
+            else:
+                dict[find(x, p_cd)] = [find(x, p_cd)]
+                dict[find(x, p_cd)] += [x]
+    
+    return dict</code></pre>
+</details>
+</dd>
+<dt id="p204.dist_matrix"><code class="name flex">
+<span>def <span class="ident">dist_matrix</span></span>(<span>n_nodes: int, w_max=10) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>dist_matrix</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función que genera una matriz cuadrada de distancias.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>n_nodes: numero de nodos de la matriz.</li>
+<li>w_max: valor máximo de cada nodo.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Matriz de distancias.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dist_matrix(n_nodes: int, w_max=10)-&gt; np.ndarray:
+    &#34;&#34;&#34;
+        Nombre:
+            dist_matrix
+
+        Descripción:
+            Función que genera una matriz cuadrada de distancias.
+
+        Argumentos:
+            - n_nodes: numero de nodos de la matriz.
+            - w_max: valor máximo de cada nodo.
+        Retorno:
+            - Matriz de distancias.
+    &#34;&#34;&#34;
+
+    #generamos la matriz aleatoria
+    M = np.random.randint(1, w_max, size=(n_nodes, n_nodes))
+    #hacemos que la matriz sea simetria respecto a la diagonal
+    for i in range(n_nodes):
+        for j in range(n_nodes):
+            M[j][i] = M[i][j]
+
+    #hacemos que la diagonal sea 0
+    np.fill_diagonal(M,0)
+
+    return M</code></pre>
+</details>
+</dd>
+<dt id="p204.exhaustive_tsp"><code class="name flex">
+<span>def <span class="ident">exhaustive_tsp</span></span>(<span>dist_m: numpy.ndarray) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>exhaustive_tsp</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Utilizando la librería de itertools, comprobaremos todas las permutaciones posibles y veremos
+cuál tiene la menor longitud de camino.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>dist_m: matriz de distancias.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>List: array del circuito con menor longitud.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def exhaustive_tsp(dist_m: np.ndarray) -&gt; List:
+    &#34;&#34;&#34;
+        Nombre:
+            exhaustive_tsp
+        
+        Descripción:
+            Utilizando la librería de itertools, comprobaremos todas las permutaciones posibles y veremos
+            cuál tiene la menor longitud de camino.
+
+        Argumentos:
+            - dist_m: matriz de distancias.
+
+        Retorno:
+            - List: array del circuito con menor longitud.
+    &#34;&#34;&#34;
+    tam = dist_m.shape[0]
+    lista_aux = []
+    tam_aux = None
+
+    # itertools.permutations devuelve TODAS las iteraciones posibles entre lo pasado por parámetro, en este caso un array de índices.
+    for i in itertools.permutations(range(tam)):
+        aux2 = np.append(i, i[0])
+
+        tam2 = len_circuit(aux2, dist_m)
+
+        if tam_aux == None or tam_aux &gt; tam2:
+            tam_aux = tam2
+            lista_aux = aux2
+    
+    return lista_aux</code></pre>
+</details>
+</dd>
+<dt id="p204.find"><code class="name flex">
+<span>def <span class="ident">find</span></span>(<span>ind: int, p_cd: numpy.ndarray) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>find</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función encargada de encontrar la raíz del índice pasado por parámetro. Se
+pide la compresión de caminos para que el rendimiento al buscar otro elemento
+sea mayor.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>ind: índice del nodo con el que vamos a trabajar.</li>
+<li>p_cd: array con los árboles.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Índice de la raíz del árbol perteneciente al nodo.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find(ind: int, p_cd: np.ndarray)-&gt; int:
+    &#34;&#34;&#34;
+    Nombre:
+        find
+
+    Descripción:
+        Función encargada de encontrar la raíz del índice pasado por parámetro. Se
+        pide la compresión de caminos para que el rendimiento al buscar otro elemento
+        sea mayor.
+
+    Argumentos:
+        - ind: índice del nodo con el que vamos a trabajar.
+        - p_cd: array con los árboles.
+    
+    Retorno:
+        - Índice de la raíz del árbol perteneciente al nodo.
+    &#34;&#34;&#34;
+    aux = []
+    while p_cd[ind] &gt;= 0:
+        &#34;&#34;&#34;
+        Algoritmo de búsqueda hacía arriba.
+
+        Guardamos en un array los nodos visitados para más tarde comprimir el camino.
+        &#34;&#34;&#34;
+        aux.append(ind) # Guardamos el índice del nodo visitado.
+        ind = p_cd[ind]
+
+    for x in range(len(aux)):
+        &#34;&#34;&#34;
+        Compresión de caminos. Situamos como padre de los nodos visitados a la 
+        raíz obtenida.
+        &#34;&#34;&#34;
+        p_cd[aux[x]] = ind
+
+    return ind</code></pre>
+</details>
+</dd>
+<dt id="p204.greedy_tsp"><code class="name flex">
+<span>def <span class="ident">greedy_tsp</span></span>(<span>dist_m: numpy.ndarray, node_ini=0) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>greedy_tsp</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función que buscará el circuito en la matriz, partiendo desde el nodo
+inicial siguiendo las distancias más cortas.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>dist_m: matriz de distancias.</li>
+<li>node_ini: nodo en el que empieza el circuito.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>La lista correspondiente al circuito.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def greedy_tsp(dist_m: np.ndarray, node_ini=0)-&gt; List:
+    &#34;&#34;&#34;
+        Nombre:
+            greedy_tsp
+        
+        Descripción:
+            Función que buscará el circuito en la matriz, partiendo desde el nodo 
+            inicial siguiendo las distancias más cortas.
+
+        Argumentos:
+            - dist_m: matriz de distancias.
+            - node_ini: nodo en el que empieza el circuito.
+
+        Retorno:
+            - La lista correspondiente al circuito.
+    &#34;&#34;&#34;
+    num_nodes = dist_m.shape[0]
+
+    lista = [node_ini]
+
+    while len(lista) &lt; num_nodes:
+        current_node = lista[-1]
+
+        not_used_nodes = list(np.argsort(dist_m[current_node]))
+
+        for i in not_used_nodes:
+            if i not in lista:
+                lista.append(i)
+                break
+
+    return lista + [node_ini]</code></pre>
+</details>
+</dd>
+<dt id="p204.init_cd"><code class="name flex">
+<span>def <span class="ident">init_cd</span></span>(<span>n: int) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>init_cd</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Inicializador de un array. Creamos un array de n elementos iniciados a -1.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>n: tamaño del array.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Array inicializado a -1.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_cd(n: int)-&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Nombre:
+        init_cd
+    
+    Descripción:
+        Inicializador de un array. Creamos un array de n elementos iniciados a -1.
+    
+    Argumentos:
+        - n: tamaño del array.
+
+    Retorno:
+        - Array inicializado a -1.
+    &#34;&#34;&#34;
+    return np.array([-1]*n)</code></pre>
+</details>
+</dd>
+<dt id="p204.len_circuit"><code class="name flex">
+<span>def <span class="ident">len_circuit</span></span>(<span>circuit: List, dist_m: numpy.ndarray) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>len_circuit</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función que calculará la longitud total del circuito.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>circuit: circuito.</li>
+<li>dist_m: matriz de distancias.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Longitud total.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def len_circuit(circuit: List, dist_m: np.ndarray) -&gt; int:
+    &#34;&#34;&#34;
+        Nombre:
+            len_circuit
+        
+        Descripción:
+            Función que calculará la longitud total del circuito.
+
+        Argumentos:
+            - circuit: circuito.
+            - dist_m: matriz de distancias.
+
+        Retorno:
+            - Longitud total.
+    &#34;&#34;&#34;
+    pos_ini = circuit[0]
+    suma = 0
+
+    for i in circuit:
+        if i == pos_ini:
+            pass
+        else:
+            pos_next = i
+            suma += dist_m[pos_ini][pos_next]
+            pos_ini = pos_next       
+
+    return suma</code></pre>
+</details>
+</dd>
+<dt id="p204.repeated_greedy_tsp"><code class="name flex">
+<span>def <span class="ident">repeated_greedy_tsp</span></span>(<span>dist_m: numpy.ndarray) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>repeated_greedy_tsp</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función que devolverá el circuito más corto. Es decir, tras buscar
+la distancia de todas las opciones, devolverá el que tenga el circuito
+con menor distancia recorrida.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>dist_m: matriz de distancias.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>Circuito más corto.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def repeated_greedy_tsp(dist_m: np.ndarray) -&gt; List:
+    &#34;&#34;&#34;
+        Nombre:
+            repeated_greedy_tsp
+
+        Descripción:
+            Función que devolverá el circuito más corto. Es decir, tras buscar
+            la distancia de todas las opciones, devolverá el que tenga el circuito
+            con menor distancia recorrida.
+
+        Argumentos:
+            - dist_m: matriz de distancias.
+
+        Retorno:
+            - Circuito más corto.
+    &#34;&#34;&#34;
+    tam = dist_m.shape[0]
+    lista_aux = []
+
+    for i in range(tam):
+        lista_aux.append(len_circuit(greedy_tsp(dist_m, i), dist_m))
+
+    indiceMin = np.argmin(lista_aux)
+            
+    return greedy_tsp(dist_m, indiceMin)</code></pre>
+</details>
+</dd>
+<dt id="p204.union"><code class="name flex">
+<span>def <span class="ident">union</span></span>(<span>rep_1: int, rep_2: int, p_cd: numpy.ndarray) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="nombre">Nombre</h2>
+<p>union</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Función que une dos árboles. Debemos comprobar cuál es más profundo para intentar
+no aumentar la profundidad del árbol si no es necesario.</p>
+<h2 id="argumentos">Argumentos</h2>
+<ul>
+<li>rep_1: índice de la raíz del primer árbol.</li>
+<li>rep_2: índice de la raíz del segundo árbol.</li>
+<li>p_cd: array con los árboles.</li>
+</ul>
+<h2 id="retorno">Retorno</h2>
+<ul>
+<li>La raíz de ambos árboles unidos.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def union(rep_1: int, rep_2: int, p_cd: np.ndarray)-&gt; int:
+    &#34;&#34;&#34;
+    Nombre:
+        union
+    
+    Descripción:
+        Función que une dos árboles. Debemos comprobar cuál es más profundo para intentar
+        no aumentar la profundidad del árbol si no es necesario.
+    
+    Argumentos:
+        - rep_1: índice de la raíz del primer árbol.
+        - rep_2: índice de la raíz del segundo árbol.
+        - p_cd: array con los árboles.
+
+    Retorno:
+        - La raíz de ambos árboles unidos.
+    &#34;&#34;&#34;
+    if p_cd[rep_1] &lt; p_cd[rep_2]:
+        p_cd[rep_2] = rep_1
+        return rep_1
+    elif p_cd[rep_1] &gt; p_cd[rep_2]:
+        p_cd[rep_1] = rep_2
+        return rep_2
+    else:
+        p_cd[rep_1] -= 1
+        p_cd[rep_2] = rep_1
+        return rep_1</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="p204.ccs" href="#p204.ccs">ccs</a></code></li>
+<li><code><a title="p204.cd_2_dict" href="#p204.cd_2_dict">cd_2_dict</a></code></li>
+<li><code><a title="p204.dist_matrix" href="#p204.dist_matrix">dist_matrix</a></code></li>
+<li><code><a title="p204.exhaustive_tsp" href="#p204.exhaustive_tsp">exhaustive_tsp</a></code></li>
+<li><code><a title="p204.find" href="#p204.find">find</a></code></li>
+<li><code><a title="p204.greedy_tsp" href="#p204.greedy_tsp">greedy_tsp</a></code></li>
+<li><code><a title="p204.init_cd" href="#p204.init_cd">init_cd</a></code></li>
+<li><code><a title="p204.len_circuit" href="#p204.len_circuit">len_circuit</a></code></li>
+<li><code><a title="p204.repeated_greedy_tsp" href="#p204.repeated_greedy_tsp">repeated_greedy_tsp</a></code></li>
+<li><code><a title="p204.union" href="#p204.union">union</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
