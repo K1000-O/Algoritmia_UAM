@@ -9,7 +9,7 @@
     2022 EPS-UAM 
 """
 import numpy as np
-from typing import Tuple, Union
+from typing import List, Tuple, Union
 
 def split (t: np.ndarray) -> Tuple[np.ndarray, int, np.ndarray]:
     """
@@ -213,6 +213,20 @@ def qsort_5(t: np.ndarray) -> np.ndarray:
     A PARTIR DE AQUÍ SE REALIZAN LAS FUNCIONES PARA LA PARTE II.
 """
 def edit_distance(str_1: str, str_2: str) -> int:
+    """
+    #Nombre:
+        edit_distance
+    
+    #Descripción:
+        Función que devuelve el número de intercambios que necesitamos para llegar de una palabra a otra.
+
+    #Argumentos:
+        - str_1: primera palabra.
+        - str_2: segunda palabra.
+
+    #Return
+        - int: entero con el número de intercambios entre una palabra y otra.
+    """
     if len(str_1) > len(str_2):
         str_1, str_2 = str_2, str_1
 
@@ -232,7 +246,49 @@ def edit_distance(str_1: str, str_2: str) -> int:
     return distances[-1]
 
 def max_subsequence_length(str_1: str, str_2: str) -> int:
-    return None
+    distances = np.zeros((len(str_1), len(str_2)), dtype=int)
+
+    for i in range(0, len(str_1)):
+        for j in range(0, len(str_2)):
+            if i == 0 or j == 0:
+                continue
+            elif str_1[i] == str_2[j]:
+                distances[i][j] = 1 + distances[i-1][j-1]
+            else:
+                distances[i][j] = max([distances[i][j-1], distances[i-1][j]])
+
+    return distances[len(str_1)-1][len(str_2)-1]
+
+def max_common_subsequence(str_1: str, str_2: str)-> str:
+    matrix = np.full((len(str_1), len(str_2)), "")
+
+    for i in range(0, len(str_1)):
+        for j in range(0, len(str_2)):
+            if i == 0 or j == 0:
+                continue
+            elif str_1[i] == str_2[j]:
+                matrix[i][j] = matrix[i-1][j-1] + str_1[i]
+            elif len(matrix[i][j-1]) > len(matrix[i-1][j]):
+                matrix[i][j] = matrix[i][j-1]
+            else:
+                matrix[i][j] = matrix[i-1][j]
+    return matrix[len(str_1)-1]
+
+def min_mult_matrix(l_dims: List[int])-> int:
+    matrix = np.zeros((len(l_dims)-1, len(l_dims)-1), dtype=int)
+    for dif in range(1, len(l_dims)-2):
+        for start in range(len(l_dims)-2-dif):
+            end = start + dif
+            # start y end las matrices de las que se quiere hallar el numero de productos
+            # x dimensiones: l_dims[x] l_dims[x+1]
+            cost = -1
+            for j in range(start, end):
+                if cost == -1:
+                    cost = matrix[start][j] + matrix[j+1][end] + l_dims[start] * l_dims[j+1] * l_dims[end+1]
+                else:
+                    cost = min([cost, matrix[start][j] + matrix[j+1][end] + l_dims[start] * l_dims[j+1] * l_dims[end+1]])
+            matrix[start][end] = cost
+    return matrix[0][len(l_dims)-2]
 
 if __name__ == "__main__":
     t = [5, 3, 1, 4, 8, 6, 7, 2, 2, 5, 5, 5] 
@@ -279,7 +335,8 @@ if __name__ == "__main__":
     print(edit_distance("biscuit", "suitcase"))
 
     print("\n ------ PRUEBA DE max_subsequence ------")
-    print(max_subsequence_length("forraje", "zarzajo"))
+    print(max_subsequence_length("forrajes", "zarzajo"))
+    print(max_common_subsequence("forraje", "zarzajo"))
 
     """
     """
