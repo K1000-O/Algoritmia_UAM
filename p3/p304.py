@@ -11,7 +11,7 @@
 import numpy as np
 from typing import List, Tuple, Union
 
-def split (t: np.ndarray) -> Tuple[np.ndarray, int, np.ndarray]:
+def split(t: np.ndarray) -> Tuple[np.ndarray, int, np.ndarray]:
     """
     #Nombre:
         split
@@ -141,9 +141,6 @@ def pivot5(t: np.ndarray) -> int:
         - int: elemento utilizado cómo pivote.
     """
     n_elementos_subconjunto = 5
-
-    # num_sublistas = np.size(t) // n_elementos_subconjunto
-    # sublistas = [t[i:i+5] for i in range(0, np.size(t), n_elementos_subconjunto)][:num_sublistas]
     
     sublistas = [t[i:i+5] for i in range(0, np.size(t), n_elementos_subconjunto)]
 
@@ -246,10 +243,24 @@ def edit_distance(str_1: str, str_2: str) -> int:
     return distances[-1]
 
 def max_subsequence_length(str_1: str, str_2: str) -> int:
+    """
+    #Nombre:
+        max_subsequence_length
+    
+    #Descripción:
+        Función que devuelve la longitud de la subsecuencia más larga que coincide en ambas palabras mediante un algoritmo de comprobación con una matriz.
+
+    #Argumentos:
+        - str_1: primera palabra.
+        - str_2: segunda palabra.
+
+    #Return
+        - int: longitud de la subsecuencia más larga de ambas palabras.
+    """
     distances = np.zeros((len(str_1), len(str_2)), dtype=int)
 
-    for i in range(0, len(str_1)):
-        for j in range(0, len(str_2)):
+    for i in range(len(str_1)):
+        for j in range(len(str_2)):
             if i == 0 or j == 0:
                 continue
             elif str_1[i] == str_2[j]:
@@ -260,24 +271,53 @@ def max_subsequence_length(str_1: str, str_2: str) -> int:
     return distances[len(str_1)-1][len(str_2)-1]
 
 def max_common_subsequence(str_1: str, str_2: str)-> str:
-    matrix = np.full((len(str_1), len(str_2)), "")
+    """
+    #Nombre:
+        max_common_subsequence
+    
+    #Descripción:
+        Función que devuelve la subsecuencia más larga que coincide en ambas palabras mediante un algoritmo de comprobación con una matriz.
 
-    for i in range(0, len(str_1)):
-        for j in range(0, len(str_2)):
-            if i == 0 or j == 0:
-                continue
-            elif str_1[i] == str_2[j]:
-                matrix[i][j] = matrix[i-1][j-1] + str_1[i]
-            elif len(matrix[i][j-1]) > len(matrix[i-1][j]):
-                matrix[i][j] = matrix[i][j-1]
+    #Argumentos:
+        - str_1: primera palabra.
+        - str_2: segunda palabra.
+
+    #Return
+        - str: subsecuencia más larga de ambas palabras.
+    """
+    distances = [["" for x in range(len(str_2))] for x in range(len(str_1))]
+
+    """
+        ALGORITMO:
+            Por cada letra de la primera palabra:
+                - Comprobamos si es igual a alguna de la anterior.
+                    if letra es igual:
+                        · si i o j es 0 --> añadimos a la matriz str[i/j]
+                        · si no --> añadimos el array de la fila anterior en la posición diagonal + la letra actual.
+                    else:
+                        · copiamos en la posición actual lo mismo que haya entre el max de la izquierda y la posición j de la anterior fila.
+    """
+    for i in range(len(str_1)):
+        for j in range(len(str_2)):
+            if str_1[i] == str_2[j]:
+                if i == 0 or j == 0:
+                    distances[i][j] = str_1[i]
+                else:
+                    distances[i][j] = distances[i-1][j-1] + str_1[i]
             else:
-                matrix[i][j] = matrix[i-1][j]
-    return matrix[len(str_1)-1]
+                distances[i][j] = max(distances[i-1][j], distances[i][j-1], key=len) # Comprobamos [ , ,Y, , ][ ,X,O, , ]. Si len(X) > len(Y): O = X else: O = Y.
+
+    subsequence = distances[-1][-1]
+
+    return subsequence
 
 def min_mult_matrix(l_dims: List[int])-> int:
-    matrix = np.zeros((len(l_dims)-1, len(l_dims)-1), dtype=int)
-    for dif in range(1, len(l_dims)-2):
-        for start in range(len(l_dims)-2-dif):
+    # Primer elemento = nº de columnas de la primera matriz. Siguiente elemento == nº de filas de la siguiente matriz.
+    # multiplicación de matrices. Si i = 0 y j = 0 --> matriz[i][j] = suma de [matriz_1[x] * matriz_2[x] + ...]
+    matrix = np.zeros((len(l_dims), len(l_dims)), dtype=int) # Iniciamos a 0 la matriz principal.
+
+    for dif in range(1, len(l_dims)):
+        for start in range(len(l_dims)-dif-1):
             end = start + dif
             # start y end las matrices de las que se quiere hallar el numero de productos
             # x dimensiones: l_dims[x] l_dims[x+1]
@@ -288,7 +328,7 @@ def min_mult_matrix(l_dims: List[int])-> int:
                 else:
                     cost = min([cost, matrix[start][j] + matrix[j+1][end] + l_dims[start] * l_dims[j+1] * l_dims[end+1]])
             matrix[start][end] = cost
-    return matrix[0][len(l_dims)-2]
+    return matrix
 
 if __name__ == "__main__":
     t = [5, 3, 1, 4, 8, 6, 7, 2, 2, 5, 5, 5] 
@@ -337,6 +377,9 @@ if __name__ == "__main__":
     print("\n ------ PRUEBA DE max_subsequence ------")
     print(max_subsequence_length("forrajes", "zarzajo"))
     print(max_common_subsequence("forraje", "zarzajo"))
+
+    l_dims = [50, 10, 40, 30, 5]
+    print(f"{l_dims}\n{min_mult_matrix(l_dims)}")
 
     """
     """
