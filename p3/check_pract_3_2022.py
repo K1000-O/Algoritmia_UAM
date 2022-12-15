@@ -60,7 +60,7 @@ def main(size, shift):
     _ = input("\npulsar Intro para continuar " + 20*'.' + "\n")
     
     print(30*'_' + "Checking matrix mult")
-    l_dims = [x, 10, 40, 30, 5] # [nº columnas, nº filas]
+    l_dims = [50, 10, 40, 30, 5] # [nº columnas, nº filas]
     print(p3.min_mult_matrix(l_dims))
 
     

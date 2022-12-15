@@ -312,23 +312,29 @@ def max_common_subsequence(str_1: str, str_2: str)-> str:
     return subsequence
 
 def min_mult_matrix(l_dims: List[int])-> int:
-    # Primer elemento = nº de columnas de la primera matriz. Siguiente elemento == nº de filas de la siguiente matriz.
-    # multiplicación de matrices. Si i = 0 y j = 0 --> matriz[i][j] = suma de [matriz_1[x] * matriz_2[x] + ...]
-    matrix = np.zeros((len(l_dims), len(l_dims)), dtype=int) # Iniciamos a 0 la matriz principal.
+    """
+    #Nombre:
+        min_mult_matrix
+    
+    #Descripción:
+        Función que devuelve la subsecuencia más larga que coincide en ambas palabras mediante un algoritmo de comprobación con una matriz.
 
-    for dif in range(1, len(l_dims)):
-        for start in range(len(l_dims)-dif-1):
-            end = start + dif
-            # start y end las matrices de las que se quiere hallar el numero de productos
-            # x dimensiones: l_dims[x] l_dims[x+1]
-            cost = -1
-            for j in range(start, end):
-                if cost == -1:
-                    cost = matrix[start][j] + matrix[j+1][end] + l_dims[start] * l_dims[j+1] * l_dims[end+1]
-                else:
-                    cost = min([cost, matrix[start][j] + matrix[j+1][end] + l_dims[start] * l_dims[j+1] * l_dims[end+1]])
-            matrix[start][end] = cost
-    return matrix
+    #Argumentos:
+        - l_dims: lista con el valor de número de filas x columnas de las matrices.
+
+    #Return
+        - int: el coste mínimo de multiplicar todas las matrices entre si.
+    """
+    costes = []
+
+    for i in range(len(l_dims) - 2):
+        coste = l_dims[i] * l_dims[i+1] * l_dims[i+2]
+        coste += min_mult_matrix(l_dims[:i+1] + l_dims[i+2:])
+        costes.append(coste)
+    
+    print(costes)
+
+    return min(costes) if len(costes) > 0 else 0 
 
 if __name__ == "__main__":
     t = [5, 3, 1, 4, 8, 6, 7, 2, 2, 5, 5, 5] 
