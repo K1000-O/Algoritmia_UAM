@@ -137,7 +137,9 @@ def create_min_heap(h: np.ndarray):
     """
     Seter del min heap.
     """
-    h = None
+    for i in (np.size(h) // 2, -1, -1):
+        h = min_heapify(h, i)
+
     return h
 
 #   APARTADO 2.B
@@ -164,6 +166,7 @@ def pq_remove(h: np.ndarray)-> Tuple[int, np.ndarray]:
         return (h[0], pq_ini())
 
     m = h[0]
+    h[0] = h[h.size-1]
     h = np.delete(h, 0)
 
     h = min_heapify(h, 0)
